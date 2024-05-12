@@ -10,17 +10,19 @@ using namespace std;
 // ############################ Reviewer class ###############################################################################
 class IMG_member
 {
-	private: 
+	public:
+	char fName[50], lName[50];
+    long long enrollmentNumber;
+	 
 	  
 
 };
 
  
 
-class Reviewer{
+class Reviewer : public IMG_member{
 private:
-	char fName[50], lName[50];
-    long long enrollmentNumber;
+	
 	
 		
 public:
@@ -174,7 +176,7 @@ public:
 // #########################################################################################################
 // ############################ Student class ##############################################################
 
-class Student{
+class Student : public IMG_member{
 private:
 	char fName[50], lName[50];
     long long enrollmentNumber;

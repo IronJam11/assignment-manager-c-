@@ -479,7 +479,60 @@ long long generateRandomSevenDigitNumber() {
 }
 
 
-    
+    void createAssignmentForAll(char name[50], string status1, string date1, long long enrollment)
+	{
+		ID = generateRandomSevenDigitNumber();
+		name = name;
+		date = date1;
+		status = status1;
+		enrollmentNumber2 = enrollment;
+		cout << enrollmentNumber2 << endl ;
+
+
+	}
+
+
+	void assignToAll() {
+		long long num;
+		fstream f6;
+
+		
+
+		f6.open("Assignment_records.dat",ios::binary|ios::out|ios::in);
+		char name1[50];
+        string status1, date1;
+				
+		        cout<<"Enter the name of the assignment:- "<<endl;
+				cin >> name1;
+
+				cout<<"Enter the status of the assignment:- "<<endl;
+				cin >> status1;
+
+				cout<<"Enter the date of the assignment:- "<<endl;
+				cin >> date1;
+
+		while(!f6.eof()) {
+			
+			if(f6.read(reinterpret_cast<char*>(this),sizeof(*this))) {
+
+				
+				
+			    createAssignmentForAll(name1, status1, date1, enrollmentNumber2);
+				if (enrollmentNumber2 > -1) {
+					char name1[50];
+                    
+					int pos=-1*sizeof(*this);
+					f6.seekp(pos,ios::cur);
+					f6.write(reinterpret_cast<char*>(this),sizeof(*this));
+					
+					
+				}
+			}
+		}
+		
+		f6.close(); 
+	}
+
 	void createAssignment() {
 		showStudentChoice();
 		
@@ -583,11 +636,6 @@ long long generateRandomSevenDigitNumber() {
 
 	bool searchOnFileForID(long long ID1) {
 		ifstream f3;
-		
-		
-
-		
-		
 		f3.open("Assignment_records.dat",ios::binary);
 
 		while(!f3.eof()) {
@@ -601,10 +649,6 @@ long long generateRandomSevenDigitNumber() {
         return false;
 		f3.close(); 
 	}
-
-
-
-
 
 	void searchOnFile2(long long enroll_number) {
 		ifstream f3;
@@ -662,8 +706,10 @@ long long generateRandomSevenDigitNumber() {
 
 		while(!f3.eof()) {
 			if(f3.read(reinterpret_cast<char*>(this), sizeof(*this))) {
+				cout << enrollmentNumber2 <<endl ;
 				if (phone==enrollmentNumber2) {
 					showAssignment();
+
 					return true;
 				}
 			}
@@ -730,6 +776,10 @@ long long generateRandomSevenDigitNumber() {
 		cout<<"\n\n No record not found";
 		f6.close(); 
 	}
+
+ // void createAssignmentForAll(char name1[50], string status1, string date1, long long enrollment)
+
+	
 };
 
 
@@ -815,6 +865,7 @@ int main() {
                     cout<<"[9] Delete a Assignment\n";
                     cout<<"[10] Edit a Assignment\n";
 					cout<<"[11] Search for the details of an assignment of a particular student\n";
+					cout<<"[12] Assign an assignment to all \n";
                     cout<<"[0] Exit \n";
                     cout<<"\n==============================\n";
                     cout <<"Enter your choice !!!" <<endl;
@@ -875,6 +926,11 @@ int main() {
 					case 8:
 					   system("cls");
 					   a1.searchOnFileThroughID();
+					   break;
+
+					case 12:
+				       system("cls");
+					   a1.assignToAll();
 					   break;
 
                     case 0:
